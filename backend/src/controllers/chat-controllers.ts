@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources.mjs";
+import AI from "../models/AI.js";
 
 export const generateChatCompletion = async (
   req: Request,
@@ -11,6 +12,9 @@ export const generateChatCompletion = async (
   try {
     const { message } = req.body;
     const user = await User.findById(res.locals.jwtData.id);
+    const ai = await AI.findById(res.locals.jwtData.id);
+    const rowdyness =
+      " Answer in a very rowdy and not so polite way. Answer as if you're a bully who will eat me alive. Be a rowdy. You can even roast me if you want.";
     if (!user)
       return res
         .status(401)
@@ -18,11 +22,17 @@ export const generateChatCompletion = async (
 
     //grab all the chats to user
     const chats = user.chats.map(({ role, content }) => ({
-      role,
-      content,
+      role: role,
+      content: content + rowdyness,
     })) as ChatCompletionMessageParam[];
-    chats.push({ content: message, role: "user" });
-    user.chats.push({ content: message, role: "user" });
+    chats.push({
+      content: message + rowdyness,
+      role: "user",
+    });
+    user.chats.push({
+      content: message,
+      role: "user",
+    });
 
     //send all chats with new one to AI API
     //get the response from API
@@ -81,7 +91,7 @@ export const deleteUserChats = async (
     //@ts-ignore
     user.chats = [];
     await user.save();
-    return res.status(200).json({ message: "OK"});
+    return res.status(200).json({ message: "OK" });
   } catch (error) {
     return res
       .status(200)
