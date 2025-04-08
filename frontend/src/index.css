@@ -11,8 +11,8 @@ body {
 .image-inverted {
   filter: invert(100%);
 }
-.nav-link{
-  font-weight:600;
+.nav-link {
+  font-weight: 600;
   text-transform: uppercase;
   margin-right: 10px;
   margin-left: 10px;
@@ -20,4 +20,16 @@ body {
   border-radius: 10px;
   text-decoration: none;
   letter-spacing: 1px;
+}
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
