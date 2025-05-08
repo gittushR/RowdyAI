@@ -1,5 +1,5 @@
 // Footer.tsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./Footer.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
