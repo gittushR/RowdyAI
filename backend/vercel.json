@@ -5,7 +5,7 @@
             "headers": [
                 {
                     "key": "Access-Control-Allow-Origin",
-                    "value": "https://rowdy-ai-frontend.vercel.app/"
+                    "value": "https://rowdy-ai-frontend.vercel.app"
                 },
                 {
                     "key": "Access-Control-Allow-Methods",
