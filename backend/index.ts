@@ -1,6 +1,5 @@
-import app from "./app.js";
-import { connectToDatabase } from "./repo/connection.js";
-
+import app from "./src/app.js";
+import { connectToDatabase } from "./src/repo/connection.js";
 
 // // Routing in express js using node
 // app.get("/hello", (req, res, next) => { return res.send("Hello") });
@@ -9,8 +8,10 @@ import { connectToDatabase } from "./repo/connection.js";
 
 //connections and listeners
 const PORT = process.env.PORT || 8080;
-connectToDatabase().then(() => {
-    app.listen(PORT, () => console.log("Server open and connected to database"));
-}).catch(err => console.error(err));
-
-
+connectToDatabase()
+  .then(() => {
+    app.listen(PORT, () =>
+      console.log("Server open and connected to database")
+    );
+  })
+  .catch((err) => console.error(err));
